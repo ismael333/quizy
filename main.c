@@ -6,7 +6,6 @@
 
 
 
-
 ///
 /// displays the menu of the game with 3 choices : the rules , to play , to quit the game
 ///
@@ -83,6 +82,8 @@ void menu(){
 
 
 void jouer(){
+
+        connectdatabase();
 
 	player ismael ={255,10,"isma"};
 
