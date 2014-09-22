@@ -84,6 +84,7 @@ void menu(){
 void jouer(){
 
         connectdatabase();
+	levelquestions();
 
 	player ismael ={255,10,"isma"};
 

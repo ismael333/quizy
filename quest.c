@@ -1,8 +1,10 @@
 
 
 #include "quest.h"
+#include <string.h>
 
-
+	sqlite3 *conn;
+	sqlite3_stmt *res;
 
 const char* viewrules(){
 
@@ -15,8 +17,7 @@ const char* viewrules(){
 
 void connectdatabase(){
 
-	sqlite3 *conn;
-	//sqlite3_stmt *res;
+
 	int error= 0;
 	//int rec_count=0;
 
@@ -37,3 +38,21 @@ void connectdatabase(){
          		 }
 
 		}
+
+
+void levelquestions(){
+
+	char * sql = "select question,optiona, reponse from lesquestions where difficulte=1";
+
+	 /* prepare the sql, leave stmt ready for loop */
+        int result = sqlite3_prepare_v2(conn, sql, strlen(sql)+1, &res, NULL) ;
+        if (result != SQLITE_OK) {
+                printf("Failed to prepare database %s\n\r",sqlite3_errstr(result)) ;
+                sqlite3_close(conn) ;
+                return 2;
+        }
+
+        printf("SQL prepared ok\n\r") ;
+
+
+}

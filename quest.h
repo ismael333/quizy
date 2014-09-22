@@ -14,13 +14,17 @@
 const char* viewrules();
 
 ///
-///connect to sqlite3 database
+///connect to sqlite3 database and opens it
 ///
 
 void connectdatabase();
 
 
-
+///
+///level questions recuperates the questions for the level entered 
+///it returns a certains number of questions nbrequestions
+///
+void levelquestions();
 
 
 #endif
