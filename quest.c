@@ -1,7 +1,8 @@
 
 
 #include "quest.h"
-#include <string.h>
+
+
 
 	sqlite3 *conn;
 	sqlite3_stmt *res;
@@ -42,17 +43,41 @@ void connectdatabase(){
 
 void levelquestions(){
 
-	char * sql = "select question,optiona, reponse from lesquestions where difficulte=1";
+	char * question;
+	char * response;
+
+	question=(char *)malloc(400);
+        response=(char *)malloc(100);
+
+	char * sql = "select * from lesquestions ";
 
 	 /* prepare the sql, leave stmt ready for loop */
         int result = sqlite3_prepare_v2(conn, sql, strlen(sql)+1, &res, NULL) ;
         if (result != SQLITE_OK) {
                 printf("Failed to prepare database %s\n\r",sqlite3_errstr(result)) ;
                 sqlite3_close(conn) ;
-                return 2;
+                
         }
 
         printf("SQL prepared ok\n\r") ;
+
+do {
+                result = sqlite3_step(res) ;
+                if (result == SQLITE_ROW) { /* can read data */
+                          int id = sqlite3_column_int(res,0) ;
+                         strcpy(question, (char *)sqlite3_column_text(res,1)) ;
+                         //strcpy(response, (char *)sqlite3_column_text(res,6)) ;
+                         printf(" la question est %s  ",question) ;
+                }
+       } while (result == SQLITE_ROW) ;
+
+    /* finish off */
+        sqlite3_close(conn) ;
+	free(question) ;
+        free(response) ;
+
+
+
 
 
 }
